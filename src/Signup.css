@@ -1,0 +1,30 @@
+.signup-page {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+
+.signup-card {
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.signup-card input {
+  height: 45px;
+  border-radius: 8px;
+}
+
+.signup-card button {
+  height: 45px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
+.card {
+  background: linear-gradient(180deg, #ffffff, #f9f9f9);
+}
+
+@media (max-width: 576px) {
+  h3 {
+    font-size: 1.5rem;
+  }
+}
