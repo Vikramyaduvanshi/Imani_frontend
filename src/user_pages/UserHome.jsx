@@ -7,7 +7,7 @@ import "../Hero.css"
 import { Helmet } from "react-helmet-async";
 
 import { useNavigate } from "react-router-dom";
-import Hero from "../componets/Hero_banner";
+
 export function UserHome() {
  const [filters, setFilters] = useState({
   gender: [],
