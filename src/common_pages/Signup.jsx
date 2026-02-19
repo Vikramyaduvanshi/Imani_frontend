@@ -4,6 +4,7 @@ import "../Signup.css";
 import { useNavigate } from "react-router-dom";
 import Loader from "../componets/loader";
 import { useToast } from "../context/ToastContext";
+import { api } from "../Util/API";
 
 export function Signup() {
   const [form, setForm] = useState({
@@ -28,7 +29,7 @@ let {showToast}=useToast()
 
     try {
       let res = await axios.post(
-        "https://imaani-perfumes.onrender.com/users/signup",
+        `${api}/users/signup`,
         form,
         { withCredentials: true }
       );

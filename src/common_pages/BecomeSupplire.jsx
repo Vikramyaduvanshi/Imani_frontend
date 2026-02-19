@@ -3,6 +3,7 @@ import "../index.css"
 import axios from "axios"
 import Loader from "../componets/loader";
 import { useToast } from "../context/ToastContext";
+import { api } from "../Util/API";
 export function Becomesupplire() {
 let [enquiryform,seteuquiryform ]=useState({
 name:"",
@@ -37,7 +38,7 @@ async function handlesubmit(e) {
     setloading(true);
 
     let res = await axios.post(
-      "https://imaani-perfumes.onrender.com/email/sendemail",
+      `${api}/email/sendemail`,
       enquiryform
     );
 

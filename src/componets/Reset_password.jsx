@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ToastProvider, useToast } from "../context/ToastContext";
 import Loader from "./loader";
+import { api } from "../Util/API";
 export function Reset_password() {
   let {showToast}=useToast()
     let [loading, setloading]=useState(false)
@@ -16,7 +17,7 @@ e.preventDefault()
 setloading(true)
 console.log(password.current.value)
 console.log(confirmPassword.current.value)
-let res= await axios.post("https://imaani-perfumes.onrender.com/users/reset_password", {password:password.current.value}, {params:{token}})
+let res= await axios.post(`${api}/users/reset_password`, {password:password.current.value}, {params:{token}})
 let ans = await res.data
 setloading(false)
 if(ans.success){

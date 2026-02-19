@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import "../App.css"
+import { api } from "../Util/API";
+import { useDispatch } from "react-redux";
+import { fetchproducts } from "../redux/productslice";
 export default function ProductForm() {
   const [product, setProduct] = useState({
     productname: "",
@@ -11,6 +14,7 @@ export default function ProductForm() {
     category: "men",
     pricing: [{ quantity: "", price: "" }]
   });
+  let dispatch=useDispatch()
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -76,14 +80,14 @@ for (let [key, value] of formData.entries()) {
 }
 
       await axios.post(
-        "https://imaani-perfumes.onrender.com/products/create-products",
+        `${api}/products/create-products`,
         formData,
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" }
         }
       );
-
+      dispatch(fetchproducts({}));
       alert("Product created successfully");
       // Reset form
       setProduct({
@@ -96,6 +100,7 @@ for (let [key, value] of formData.entries()) {
         pricing: [{ quantity: "", price: "" }]
       });
       setImages([]);
+      
     } catch (err) {
       console.error(err);
       alert("Error creating product");

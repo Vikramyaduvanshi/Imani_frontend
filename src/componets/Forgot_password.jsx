@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Loader from "./loader";
 import { useToast } from "../context/ToastContext";
+import { api } from "../Util/API";
 export function Forget_Password(){
   let {showToast}=useToast()
 let [user,setuser]=useState("")
@@ -10,7 +11,7 @@ async function handlesubmit(e){
     e.preventDefault()
 console.log(user)
 setloading(true)
-let res = await axios.post("https://imaani-perfumes.onrender.com/users/forgot_password", {email:user})
+let res = await axios.post(`${api}/users/forgot_password`, {email:user})
 let ans=await res.data
 setloading(false)
 

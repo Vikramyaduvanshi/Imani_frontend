@@ -6,6 +6,7 @@ import "../index.css"
 import { addToCart } from "../redux/Cartslice"
 import { startCartSyncTimer } from "../redux/cartSyncTimer"
 import { Authcontext } from "../context/Authcontext"
+import { api } from "../Util/API"
 
 export function Product_Details() {
   const { products, filteredProduct } = useSelector((state) => state.Allproducts)
@@ -44,7 +45,7 @@ let qty= useRef(1)
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(`https://imaani-perfumes.onrender.com/products/product/${id}`)
+        const res = await axios.get(`${api}/products/product/${id}`)
         const item = res.data.product
         setProductData(item)
         setDisplayPrice(item.price) // Default Price

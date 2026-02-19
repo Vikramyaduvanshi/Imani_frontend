@@ -14,6 +14,10 @@ console.log("navbar",user)
 
 <>
 {user?.role=="admin" ?<Admin_navbar/>  : <User_navbar/> } 
+
+
+
+
 </>
 
     )

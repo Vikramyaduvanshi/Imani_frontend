@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { api } from "../Util/API";
 
 /**
  * 🔥 Batch Sync API Thunk
@@ -14,7 +15,7 @@ export const syncCartToDB = createAsyncThunk(
 
 
     let res=await axios.post(
-      "https://imaani-perfumes.onrender.com/cart/add-cart",{ array:pendingItems },{ withCredentials: true}
+      `${api}/cart/add-cart`,{ array:pendingItems },{ withCredentials: true}
     );
     let ds= await res.data
     console.log("response from cart api",ds)
@@ -36,7 +37,7 @@ export const deletecartproduct = createAsyncThunk(
 
 
     let res=await axios.post(
-      "https://imaani-perfumes.onrender.com/cart/delete-cart",{ array:deleteproductfromcart },{ withCredentials: true}
+     `${api}/cart/delete-cart`,{ array:deleteproductfromcart },{ withCredentials: true}
     );
     let ds= await res.data
     console.log("response from cart api",ds)

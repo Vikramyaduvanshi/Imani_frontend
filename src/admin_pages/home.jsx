@@ -7,6 +7,7 @@ import "../App.css"
 import { AdminPrdetails } from "./Adminprdetails"
 import axios from "axios"
 import default_prfume from "../assets/default_prfume.png"
+import { api } from "../Util/API"
 export function Home(){
   let loader=useRef()
   let [load,setload]=useState(false)
@@ -62,14 +63,14 @@ if(hashmore && entry.isIntersecting){
 async function Deletproduct(id){
   setload(id)
   console.log(id)
-let product = await axios.delete(`https://imaani-perfumes.onrender.com/products/delete-product/${id}`,{ withCredentials: true}
+let product = await axios.delete(`${api}/products/delete-product/${id}`,{ withCredentials: true}
 )
 
 let res= await product.data
 setload(null)
 if(res.success){
+ dispatch(fetchproducts({ searchword, page }));
 alert(res.message)
-dispatch(fetchproducts())
 }else{
   alert(res.message)
 }

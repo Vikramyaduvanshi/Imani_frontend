@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { api } from "../Util/API";
 
 export function Updateproduct({ products }) {
 
@@ -110,7 +111,7 @@ console.log(products)
       });
 
       await axios.put(
-        `https://imaani-perfumes.onrender.com/products/update-product/${products._id}`,
+        `${api}/products/update-product/${products._id}`,
         formData,
         {
           withCredentials: true,

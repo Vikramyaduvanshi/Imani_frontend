@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch } from "react-redux";
 import { additem } from "../redux/Cartslice";
 import { useNavigate } from "react-router-dom";
+import { api } from "../Util/API";
 
 
 export let Authcontext= createContext();
@@ -24,7 +25,7 @@ let dispatch=useDispatch()
 async function login(obj){
   console.log("auth login",obj)
 setloading(true)
-let res= await axios.post("https://imaani-perfumes.onrender.com/users/login",obj, {
+let res= await axios.post(`${api}/users/login`,obj, {
     withCredentials: true   
   })
 
@@ -45,7 +46,7 @@ async function logout() {
   setuser(null);
 
   try {
-    await axios.post("https://imaani-perfumes.onrender.com/users/logout", {}, { withCredentials: true });
+    await axios.post(`${api}/users/logout`, {}, { withCredentials: true });
     console.log("Logged out successfully");
   } catch (err) {
     console.error(err);

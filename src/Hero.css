@@ -1,0 +1,327 @@
+/* ================= CAROUSEL ================= */
+.carousel-item img{
+  height:70vh;
+  object-fit:cover;
+}
+
+.carousel-caption{
+  bottom:50%;
+  text-align:left;
+}
+
+.carousel-caption h2{
+  font-weight:600;
+}
+
+/* ================= LAYOUT ================= */
+.mainsection{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:25px;
+  grid-template-areas:
+    "btn-section btn-section"
+    "advanced_search container";
+  align-items:start;
+  padding:20px;
+}
+
+/* ================= FILTER TOP BAR ================= */
+.btn-section{
+  grid-area: btn-section;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid #f0f0f0;
+  box-shadow:rgba(149,157,165,.1) 0px 8px 24px;
+
+  flex-wrap:nowrap;
+  overflow-x:auto;        /* key */
+  scrollbar-width:none;
+}
+
+.btn-section::-webkit-scrollbar{
+  display:none;
+}
+
+.btn-section button{
+  padding:8px 20px;
+  border-radius:10px;
+  border:none;
+  background:#000;
+  color:#fff;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* ================= SIDEBAR FILTER ================= */
+.advanced_search{
+  grid-area:advanced_search;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  position:sticky;
+  top:20px;
+}
+
+/* Filter Boxes */
+.box-1,.box-2,.box-3,.box-4{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  border:1px solid #eee;
+  padding:1.2rem;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  font-family:'Trebuchet MS',Arial;
+}
+
+.filter-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.filter-item input{
+  cursor:pointer;
+}
+
+.filter-item label{
+  cursor:pointer;
+  font-size:14px;
+}
+
+/* ================= PRODUCT CONTAINER ================= */
+.container{
+  grid-area:container;
+}
+
+/* ================= ACTIVE FILTER CHIPS ================= */
+.active-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:10px 10px;
+  margin:10px 0 15px;
+  list-style:none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.active-filters li{
+  background:#f1f5ff;
+  color:#1d4ed8;
+  padding:6px 14px;
+  border-radius:10px;
+  font-size:14px;
+  cursor:pointer;
+  border:1px solid #dbe4ff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:.25s;
+}
+
+.active-filters li:hover{
+  background:#1d4ed8;
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 10px rgba(29,78,216,.25);
+}
+
+.active-filters li::after{
+  content:"✕";
+  font-size:13px;
+}
+
+/* ================= SORT ================= */
+.sort{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content: space-between;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+
+/* select */
+.sort select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  width:auto;
+  min-width:72px;
+  max-width:130px;
+
+  padding:6px 26px 6px 10px;
+  font-size:13px;
+  border-radius:8px;
+  border:1px solid #dcdcdc;
+  background:#fff;
+  color:#333;
+
+  flex-shrink:1;
+}
+
+/* focus */
+.sort select:focus{
+  outline:none;
+  border-color:#1d4ed8;
+  box-shadow:0 0 0 3px rgba(29,78,216,.15);
+}
+
+/* ========================================================= */
+/* ================= MOBILE FILTER MODAL ==================== */
+/* ========================================================= */
+
+.filter-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  visibility:hidden;
+  opacity:0;
+  transition:.3s;
+  z-index:999;
+}
+
+.filter-modal.active{
+  visibility:visible;
+  opacity:1;
+}
+
+/* drawer */
+.filter-drawer{
+  position:absolute;
+  left:-100%;
+  top:0;
+  width:85%;
+  max-width:340px;
+  height:100%;
+  background:#fff;
+  padding:20px;
+  overflow:auto;
+  transition:.35s ease;
+}
+
+.filter-modal.active .filter-drawer{
+  left:0;
+}
+
+/* close btn */
+.close-filter{
+  position:absolute;
+  right:15px;
+  top:15px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* apply button */
+.apply-filter{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border:none;
+  background:#000;
+  color:#fff;
+  border-radius:10px;
+  font-weight:600;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width:800px){
+
+  .mainsection{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "btn-section"
+      "container";
+  }
+
+  /* hide sidebar ONLY visually */
+  .advanced_search{
+    display:none;
+  }
+
+  /* show filter button center */
+  .btn-section{
+    /* justify-content:space-between; */
+display: grid;
+/* grid-template-rows:  */
+
+grid-template-columns: 2fr 1fr;
+grid-template-areas:
+"button sort"
+"active-filters active-filters"
+;
+
+
+  }
+.active-filters{
+  grid-area: active-filters;
+  display: flex;
+  justify-content: center;
+
+}
+.active-filters li{
+padding: 5px;
+
+}
+.button{
+  grid-area: button;
+}
+.sort{
+  grid-area: sort;
+    /* justify-content:space-between; */
+    width: 200px;
+    /* border: 1px solid red; */
+  }
+  .btn-section button{
+display: flex;
+padding: 5px 1px;
+width: 100px;
+justify-content: space-around;
+}
+}
+
+
+@media (max-width:500px){
+  .sort select{
+    min-width:65px;
+    max-width:110px;
+    font-size:12px;
+  }
+  
+.btn-section button{
+display: flex;
+padding: 5px 10px;
+justify-content: space-between;
+}
+.active-filters li{
+padding: 2px;
+gap:3px;
+font-size:13px;
+border-radius: 5px;
+}
+}
+
+/* ultra small phones */
+@media (max-width:360px){
+  .sort select{
+    min-width:38px;
+    max-width:80px;
+    font-size:11px;
+    padding:5px 0px 5px 5px;
+  }
+}
+
+/* 300px safety */
+@media (max-width:300px){
+  .sort select{
+    min-width:52px;
+    max-width:75px;
+    font-size:10px;
+  }
+}
