@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearfiltered, fetchproducts, setarr, setprice } from "../redux/productslice";
 import "../App.css"
-import "../Hero.css"
+// import "../Hero.css"
 
 import { Helmet } from "react-helmet-async";
 
