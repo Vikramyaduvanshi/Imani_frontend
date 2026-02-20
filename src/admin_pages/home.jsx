@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchproducts, setpage } from "../redux/productslice"
+import { deleteproduct, fetchproducts, setpage } from "../redux/productslice"
 import Loader from "../componets/loader"
 import "../App.css"
 // import ProductForm from "./Create_product"
@@ -69,7 +69,8 @@ let product = await axios.delete(`${api}/products/delete-product/${id}`,{ withCr
 let res= await product.data
 setload(null)
 if(res.success){
- dispatch(fetchproducts({ searchword, page }));
+//  dispatch(fetchproducts({ searchword, page }));
+dispatch(deleteproduct(id))
 alert(res.message)
 }else{
   alert(res.message)
@@ -168,7 +169,7 @@ renderproduct = filteredProduct.length>0 ? filteredProduct : products
               <div className="mt-auto pt-2 border-top">
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <span className="fw-bold text-dark" style={{ fontSize: '1.2rem' }}>
-                    ₹{price.toLocaleString()}
+                    ₹{price}
                   </span>
                 </div>
 

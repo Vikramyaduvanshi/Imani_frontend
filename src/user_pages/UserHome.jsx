@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearfiltered, fetchproducts, setarr, setprice } from "../redux/productslice";
+import { clearfiltered, fetchproducts, setarr, setprice, sortprice, sortrating } from "../redux/productslice";
 import "../App.css"
 // import "../Hero.css"
 
@@ -53,6 +53,9 @@ console.log("filter in userhome", filters)
 
   const dataToRender =
     filteredProduct.length > 0 ? filteredProduct : products;
+
+
+
 
 function remove(v){
 dispatch(setarr(v))
@@ -134,33 +137,33 @@ function handleaddfilter(e){
     return { ...prev, [name]: Number(value) };
   });
 }
-const filteredProducts = useMemo(()=>{
+// const filteredProducts = useMemo(()=>{
 
-  if(!products || !Array.isArray(products)) return [];
+//   if(!products || !Array.isArray(products)) return [];
 
-  return products.filter(p => {
+//   return products.filter(p => {
 
-    const gender   = p.gender?.toLowerCase();
-    const category = p.category?.toLowerCase();
-    const price    = Number(p.price);
-    const rating   = Number(p.rating);
+//     const gender   = p.gender?.toLowerCase();
+//     const category = p.category?.toLowerCase();
+//     const price    = Number(p.price);
+//     const rating   = Number(p.rating);
 
-    if(filters.gender.length && !filters.gender.includes(gender))
-      return false;
+//     if(filters.gender.length && !filters.gender.includes(gender))
+//       return false;
 
-    if(filters.category.length && !filters.category.includes(category))
-      return false;
+//     if(filters.category.length && !filters.category.includes(category))
+//       return false;
 
-    if(price > filters.price)
-      return false;
+//     if(price > filters.price)
+//       return false;
 
-    if(rating < filters.rating)
-      return false;
+//     if(rating < filters.rating)
+//       return false;
 
-    return true;
-  });
+//     return true;
+//   });
 
-},[products, filters]);
+// },[products, filters]);
 
 
 return (
@@ -248,12 +251,12 @@ return (
 </ul>
 
 <div className="sort">
-  <select name="Price" id="price" value="">
+  <select name="Price" id="price" value="" onChange={(e)=>dispatch(sortprice(e.target.value))}>
   <option value="">price</option>
   <option value="High to low">High to low</option>
   <option value="Low to hight">Low to hight</option>
 </select>
-  <select name="Price" id="price" value="">
+  <select name="Rating" id="price" value="" onChange={(e)=> dispatch(sortrating(e.target.value))}>
   <option value="">rating</option>
   <option value="High to low">High to low</option>
   <option value="Low to hight">Low to hight</option>

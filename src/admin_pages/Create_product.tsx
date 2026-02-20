@@ -3,7 +3,7 @@ import axios from "axios";
 import "../App.css"
 import { api } from "../Util/API";
 import { useDispatch } from "react-redux";
-import { fetchproducts } from "../redux/productslice";
+import { fetchproducts, setprcreated } from "../redux/productslice";
 export default function ProductForm() {
   const [product, setProduct] = useState({
     productname: "",
@@ -79,7 +79,7 @@ for (let [key, value] of formData.entries()) {
   console.log(key, value);
 }
 
-      await axios.post(
+ let res=     await axios.post(
         `${api}/products/create-products`,
         formData,
         {
@@ -87,7 +87,11 @@ for (let [key, value] of formData.entries()) {
           headers: { "Content-Type": "multipart/form-data" }
         }
       );
-      dispatch(fetchproducts({}));
+let createdpr= await res.data
+if(createdpr.success){
+dispatch(setprcreated(createdpr.product))
+}
+      console.log("created product ", createdpr)
       alert("Product created successfully");
       // Reset form
       setProduct({

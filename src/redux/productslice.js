@@ -29,7 +29,8 @@ searchword:"",
 page:1,
 filterarr:[],
 maxprice:5000,
-hashmore:true
+hashmore:true,
+
 }
 
 let Prodcutslice= createSlice({
@@ -59,6 +60,49 @@ setpage:(state,action)=>{
 state.page = action.payload+state.page
 },
 deleteproduct:(state,action)=>{
+if(state.filteredProduct.length>0){
+state.filteredProduct= state.filteredProduct.filter((v)=> v._id !==action.payload)
+}
+
+state.products= state.products.filter((v)=> v._id !==action.payload)
+
+},
+sortprice:(state,action)=>{
+if(state.filteredProduct.length>0){
+if(action.payload=="High to low"){
+state.filteredProduct=  state.filteredProduct.sort((a,b)=>b["price"]-a["price"])
+}else{
+state.filteredProduct=  state.filteredProduct.sort((a,b)=>a["price"]-b["price"])
+}
+
+}else{
+if(action.payload=="High to low"){
+state.products=  state.products.sort((a,b)=>b["price"]-a["price"])
+}else{
+state.products=  state.products.sort((a,b)=>a["price"]-b["price"])
+}
+}
+
+},
+sortrating:(state,action)=>{
+if(state.filteredProduct.length>0){
+if(action.payload=="High to low"){
+state.filteredProduct=  state.filteredProduct.sort((a,b)=>b["rating"].rate-a["rating"].rate)
+}else{
+state.filteredProduct=  state.filteredProduct.sort((a,b)=>a["rating"].rate-b["rating"].rate)
+}
+
+}else{
+if(action.payload=="High to low"){
+state.products=  state.products.sort((a,b)=>b["rating"].rate-a["rating"].rate)
+}else{
+state.products=  state.products.sort((a,b)=>a["rating"].rate-b["rating"].rate)
+}
+}
+
+},
+setprcreated:(state,action)=>{
+state.products.push(action.payload)
 
 }
 
@@ -98,4 +142,4 @@ state.err=action.payload
 
 
 export default Prodcutslice.reducer;
-export const {setsearch,clearfiltered,setpage,setarr,clearsetarr,setprice}= Prodcutslice.actions
+export const {setsearch,clearfiltered,setpage,setarr,clearsetarr,setprice,sortprice, sortrating,deleteproduct, setprcreated}= Prodcutslice.actions
