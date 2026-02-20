@@ -134,40 +134,35 @@ function handleaddfilter(e){
     return { ...prev, [name]: Number(value) };
   });
 }
-// const filteredProducts = useMemo(()=>{
+const filteredProducts = useMemo(()=>{
 
-//   if(!products || !Array.isArray(products)) return [];
+  if(!products || !Array.isArray(products)) return [];
 
-//   return products.filter(p => {
+  return products.filter(p => {
 
-//     const gender   = p.gender?.toLowerCase();
-//     const category = p.category?.toLowerCase();
-//     const price    = Number(p.price);
-//     const rating   = Number(p.rating);
+    const gender   = p.gender?.toLowerCase();
+    const category = p.category?.toLowerCase();
+    const price    = Number(p.price);
+    const rating   = Number(p.rating);
 
-//     if(filters.gender.length && !filters.gender.includes(gender))
-//       return false;
+    if(filters.gender.length && !filters.gender.includes(gender))
+      return false;
 
-//     if(filters.category.length && !filters.category.includes(category))
-//       return false;
+    if(filters.category.length && !filters.category.includes(category))
+      return false;
 
-//     if(price > filters.price)
-//       return false;
+    if(price > filters.price)
+      return false;
 
-//     if(rating < filters.rating)
-//       return false;
+    if(rating < filters.rating)
+      return false;
 
-//     return true;
-//   });
+    return true;
+  });
 
-// },[products, filters]);
+},[products, filters]);
 
- if(loading){
-  return <>
-  <Loader loading={loading} message="Products is loading please wait"/>
-  
-  </>
- }
+
 return (
  <>
  
@@ -228,7 +223,7 @@ return (
 
 
 {/* <Hero/> */}
-
+<Loader loading={loading} message="Products is loading please wait"/>
 
 <section className="mainsection">
 <section className="btn-section">
