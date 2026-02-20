@@ -7,6 +7,7 @@ import "../App.css"
 import { Helmet } from "react-helmet-async";
 
 import { useNavigate } from "react-router-dom";
+import Loader from "../componets/loader";
 
 export function UserHome() {
  const [filters, setFilters] = useState({
@@ -22,7 +23,7 @@ export function UserHome() {
   const dispatch = useDispatch();
   const initialMount = useRef(true);
 let navigate=useNavigate()
-  const { products, filteredProduct, page, searchword,filterarr, maxprice } = useSelector((state) => state.Allproducts);
+  const { products, filteredProduct, page, searchword,filterarr, maxprice, loading } = useSelector((state) => state.Allproducts);
 
 
   useEffect(() => {
@@ -161,7 +162,12 @@ function handleaddfilter(e){
 
 // },[products, filters]);
 
- 
+ if(loading){
+  return <>
+  <Loader loading={loading} message="Products is loading please wait"/>
+  
+  </>
+ }
 return (
  <>
  
