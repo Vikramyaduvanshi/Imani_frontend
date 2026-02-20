@@ -82,71 +82,84 @@ dispatch(setarr(v))
   });
 
 }
-let priceref=useRef()
+let priceref = useRef()
+
 function handleaddfilter(e){
   const {name, value, type, checked} = e.target;
 
-// console.log(value,"value in handlefilter")
   setFilters(prev => {
 
     // CHECKBOX
     if(type === "checkbox"){
-      let updated = prev[name] || [];
-dispatch(setarr(value))
+
+      // gender single
+      if(name === "gender"){
+        const newGender = checked ? [value] : [];
+        dispatch(setarr(newGender));
+        return { ...prev, gender: newGender };
+      }
+
+      // ⭐⭐⭐ CATEGORY SINGLE SELECT FIX ⭐⭐⭐
+      if(name === "category"){
+        const newCategory = checked ? [value] : [];
+        dispatch(setarr(newCategory));
+        return { ...prev, category: newCategory };
+      }
+
+      // other checkbox (future use)
+      let updated = [...(prev[name] || [])];
+
       if(checked){
         if(!updated.includes(value)){
-          updated = [...updated, value];
+          updated.push(value);
         }
       }else{
         updated = updated.filter(v => v !== value);
       }
 
-
+      dispatch(setarr(updated));
       return { ...prev, [name]: updated };
     }
 
-    // RANGE (convert to number)
+    // RANGE
     if(priceref.current){
       clearTimeout(priceref.current)
     }
+
     priceref.current=setTimeout(()=>{
       dispatch(setprice(value))
-     
     },1000)
-    console.log("price product ", name, value)
 
-
-    
-     return { ...prev, [name]: Number(value) };
+    return { ...prev, [name]: Number(value) };
   });
 }
-const filteredProducts = useMemo(()=>{
+// const filteredProducts = useMemo(()=>{
 
-  if(!products || !Array.isArray(products)) return [];
+//   if(!products || !Array.isArray(products)) return [];
 
-  return products.filter(p => {
+//   return products.filter(p => {
 
-    const gender   = p.gender?.toLowerCase();
-    const category = p.category?.toLowerCase();
-    const price    = Number(p.price);
-    const rating   = Number(p.rating);
+//     const gender   = p.gender?.toLowerCase();
+//     const category = p.category?.toLowerCase();
+//     const price    = Number(p.price);
+//     const rating   = Number(p.rating);
 
-    if(filters.gender.length && !filters.gender.includes(gender))
-      return false;
+//     if(filters.gender.length && !filters.gender.includes(gender))
+//       return false;
 
-    if(filters.category.length && !filters.category.includes(category))
-      return false;
+//     if(filters.category.length && !filters.category.includes(category))
+//       return false;
 
-    if(price > filters.price)
-      return false;
+//     if(price > filters.price)
+//       return false;
 
-    if(rating < filters.rating)
-      return false;
+//     if(rating < filters.rating)
+//       return false;
 
-    return true;
-  });
+//     return true;
+//   });
 
-},[products, filters]);
+// },[products, filters]);
 
  
 return (
@@ -270,22 +283,30 @@ return (
   </div>
 </div>
 
-{/* CATEGORY */}
-<div className="box-2">
+{/* CATEGORY */}<div className="box-2">
   <h5>Category:</h5>
 
   <div className="filter-item">
-    <input type="checkbox" id="perfumes" name="category" value="Perfume" onChange={handleaddfilter} checked={filters.category.includes("Perfume")}/>
-    <label htmlFor="Perfume">Perfumes</label>
+    <input type="checkbox" id="perfume" name="category" value="Perfume"
+      onChange={handleaddfilter}
+      checked={filters.category.includes("Perfume")}
+    />
+    <label htmlFor="perfume">Perfumes</label>
   </div>
 
   <div className="filter-item">
-    <input type="checkbox" id="cosmetic" name="category" value="Cosmetic" onChange={handleaddfilter} checked={filters.category.includes("Cosmetic")}/>
+    <input type="checkbox" id="cosmetic" name="category" value="Cosmetic"
+      onChange={handleaddfilter}
+      checked={filters.category.includes("Cosmetic")}
+    />
     <label htmlFor="cosmetic">Cosmetic</label>
   </div>
 
   <div className="filter-item">
-    <input type="checkbox" id="bodycare" name="category" value="Body Care" onChange={handleaddfilter} checked={filters.category.includes("Body Care")}/>
+    <input type="checkbox" id="bodycare" name="category" value="Body Care"
+      onChange={handleaddfilter}
+      checked={filters.category.includes("Body Care")}
+    />
     <label htmlFor="bodycare">Body Care</label>
   </div>
 </div>
@@ -458,7 +479,7 @@ return (
           <div className="box-2">
             <h5>Category</h5>
 
-            {["Perfumes","Cosmetic","Body Care"].map(c => (
+            {["Perfume","Cosmetic","Body Care"].map(c => (
               <div className="filter-item" key={c}>
                 <input
                   type="checkbox"
