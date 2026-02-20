@@ -43,11 +43,19 @@ return {success:ans.success, message:ans.message}
 }
 
 async function logout() {
-  setuser(null);
+ 
 
   try {
     await axios.post(`${api}/users/logout`, {}, { withCredentials: true });
-    console.log("Logged out successfully");
+    document.body.classList.remove("modal-open")
+  document.body.style.overflow = "auto"
+  document.body.style.paddingRight = "0px"
+
+  document.querySelectorAll(".modal").forEach(m => m.classList.remove("show"))
+  document.querySelectorAll(".modal-backdrop").forEach(el => el.remove())
+
+   setuser(null);
+  navigate("/")
   } catch (err) {
     console.error(err);
   }
