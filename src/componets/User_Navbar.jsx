@@ -192,7 +192,7 @@ dispatch(clearfiltered())
                 <button
                   className="btn btn-outline-primary btn-sm rounded-pill"
                   onClick={() =>
-                    navigate(`/profile/${user?._id || user?.id}`)
+                    navigate(`/profile`)
                   }
                   data-bs-dismiss="modal"
                 >

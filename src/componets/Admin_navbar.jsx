@@ -131,7 +131,7 @@ export function Admin_navbar() {
                 <button
                   className="btn btn-outline-primary btn-sm rounded-pill"
                   data-bs-dismiss="modal"
-                  onClick={() => navigate(`/profile/${user.id}`)}
+                  onClick={() => navigate(`/profile`)}
                 >
                   Edit Profile
                 </button>

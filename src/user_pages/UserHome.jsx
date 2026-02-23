@@ -43,7 +43,7 @@ let navigate=useNavigate()
 
 console.log("filter in userhome", filters)
   },[filterarr,maxprice])
-
+ 
   useEffect(() => {
     if (!initialMount.current && page >1) {
       dispatch(fetchproducts({ page, searchword }));
@@ -217,7 +217,7 @@ return (
         "name": "Imaani Perfumes",
         "url": "https://imaaniperfumes.com",
         "description": "Luxury perfumes and cosmetics store",
-        "logo": "https://imaaniperfumes.com/logo.png"
+        "logo": "/logo.jpeg"
       }
       `}
     </script>
@@ -230,12 +230,12 @@ return (
 
 <section className="mainsection">
 <section className="btn-section">
-<button type="button" style={{backgroundColor:"#2e8541d2", color:"white"}}
+<button type="button" style={{backgroundColor:"#0D6EFD", color:"white"}}
   className="mobile-filter-btn"
   data-bs-toggle="modal"
   data-bs-target="#filterModal"
 >
-  <img src="/filter (1).png" alt="filter" height="20" width="20" style={{margin:"2px"}}/>
+  <img src="/filter (1).png" alt="filter" height="20" width="20" style={{margin:"2px", color:"white"}}/>
   <span>Filter</span>
 </button>
 
@@ -252,12 +252,12 @@ return (
 
 <div className="sort">
   <select name="Price" id="price" value="" onChange={(e)=>dispatch(sortprice(e.target.value))}>
-  <option value="">price</option>
+  <option value="">price &#9662;</option>
   <option value="High to low">High to low</option>
   <option value="Low to hight">Low to hight</option>
 </select>
   <select name="Rating" id="price" value="" onChange={(e)=> dispatch(sortrating(e.target.value))}>
-  <option value="">rating</option>
+  <option value="">rating &#9662;</option>
   <option value="High to low">High to low</option>
   <option value="Low to hight">Low to hight</option>
 </select>

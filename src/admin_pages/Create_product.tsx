@@ -85,7 +85,7 @@ for (let [key, value] of formData.entries()) {
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" }
-        }
+        }  
       );
 let createdpr= await res.data
 if(createdpr.success){

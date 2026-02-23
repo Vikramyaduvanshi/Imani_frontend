@@ -39,7 +39,7 @@ function App() {
 
         {/* private */}
         <Route element={<PrivateRoute />}>
-          <Route path="/profile/:id" element={<Updateprofile />} />
+          <Route path="/profile" element={<Updateprofile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/address" element={<Address />} />
